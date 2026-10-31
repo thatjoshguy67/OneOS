@@ -148,6 +148,30 @@ The responsive RRO compiles/links successfully; its SHA is updated in both N6
 package lists and their test fixtures. Rebuild the affected N6 artifacts with
 the release's normal toolchain/key before compiling the full app.
 
+## Source-port validation
+
+| Check | Result |
+| --- | --- |
+| Kotlin model suite | 207 passed |
+| Safety suite | 5 passed; 1 existing fixture skipped |
+| Root audits and affected staging/integrity flows | 15 passed |
+| Performance handover fixtures | 8 passed |
+| Property, camera, responsive-resource and donor-refusal checks | 5 passed |
+| Overlay integrity and guest-data path boundary checks | 4 passed |
+| Existing Fold8 ColorOS / Pixel regression scripts | 4 / 4 passed; 1 optional pristine-SystemUI fixture skipped |
+| Session scripts and nested shell strings | Parsed with dash and Android BusyBox |
+| Geometry DEX and rebuilt Wallpapers | No empty try ranges or orphan move-results |
+| Wallpapers APK contents | classes5.dex/classes6.dex exactly reproduce accepted artifact; other entries unchanged |
+| Responsive RRO | Compiled, linked and pinned in both N6 lists/fixtures |
+
+The broader root run completed 121 tests with one existing fixture skip and
+one failure: an audit expectation treated the new DEX as executable. That
+expectation was corrected to 0644; all 11 audits and four affected preparation,
+pinned-launcher, tamper-refusal and Fold8 staging tests then passed. A full
+0.4.34-based APK build and physical switch/return remain release gates. The
+combined source-owned geometry helper has been compiled and DEX-checked;
+the accepted phone trial used the equivalent separate helpers.
+
 ## Remaining limitations / deliberately excluded
 
 - Global Photos launches and sees existing images in the device experiment;
